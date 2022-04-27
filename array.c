@@ -2,8 +2,8 @@
 
 #define N 6U
 
-void print_a(int *);
-void print_a2(int (*)[N]);
+void PrintA(int *);
+void PrintA2(int (*)[N]);
 
 int main(void)
 {
@@ -27,7 +27,7 @@ int main(void)
 
   //Выводим квадратную матрицу
   printf("Матрица 1. Квадратная:\n");
-  print_a2(sqare_a);
+  PrintA2(sqare_a);
 
   //Честно разворачиваем вторую матрицу
   for (int k=0; k<N/2; k++)
@@ -39,11 +39,11 @@ int main(void)
 
   //Выводим вторую матрицу в реверсе
   printf("Матрица 2. Реверс:\n");
-  print_a(backw_a);
+  PrintA(backw_a);
 
   //Выводим матрицу с единицами ниже побочной диагонали
   printf("Матрица 3. Треугольная:\n");
-  print_a2(triag_a);
+  PrintA2(triag_a);
 
   //Заполняем матрицу улитку
   int dX = 1, dY  = 0, cX = 0, cY = 0 , val = 1; //
@@ -92,12 +92,12 @@ int main(void)
 
   //Выводим матрицу улитку
   printf("Матрица 4. Матрица-улитка:\n");
-  print_a2(snail_a);
+  PrintA2(snail_a);
 
   return 0;
 }
 
-void print_a(int *a)
+void PrintA(int *a)
 {
   for (int i=0; i<N; i++)
   {
@@ -106,7 +106,7 @@ void print_a(int *a)
   printf("\n");
 }
 
-void print_a2(int (*a)[N])
+void PrintA2(int (*a)[N])
 {
   for (int i=0; i<N; i++)
   {

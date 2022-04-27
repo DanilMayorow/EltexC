@@ -4,46 +4,46 @@
 #define N 10
 
 //Структуры
-struct phone
+struct Phone
 {
-  char Name[22];
-  long int Number;
+  char name[22];
+  long int number;
 };
 
 //Собственное наименование типов
-typedef struct phone phone;
+typedef struct Phone Phone;
 
 //Прототипы функций
-int menu(void);
-void add_phone(phone[N], unsigned char);
-void show(phone[N], unsigned char);
-void find_acc(phone[N]);
-char cross_out(phone[N], unsigned char);
+int Menu(void);
+void AddPhone(Phone[N], unsigned char);
+void Show(Phone[N], unsigned char);
+void FindAcc(Phone[N]);
+char CrossOut(Phone[N], unsigned char);
 
 //Основная программа
 int main(void)
 {
   unsigned char count_acc = 0;
-  phone Phonebook[N];
+  Phone phonebook[N];
   unsigned char act;
 
   do{
-    act = menu();
+    act = Menu();
     switch(act)
     {
       case 1:
         if (count_acc == N) {printf("Список абонентов полон\n");}
         else {
-          add_phone(Phonebook, count_acc);
+          AddPhone(phonebook, count_acc);
           count_acc++;
         }
         break;
-      case 2: show(Phonebook, count_acc); break;
-      case 3: find_acc(Phonebook); break;
+      case 2: Show(phonebook, count_acc); break;
+      case 3: FindAcc(phonebook); break;
       case 4:
         if (count_acc == 0) {printf("Список абонентов пуст\n");}
         else {
-          (cross_out(Phonebook, count_acc)==1) ? count_acc-- : printf("Нет такой позиции\n");
+          (CrossOut(phonebook, count_acc)==1) ? count_acc-- : printf("Нет такой позиции\n");
         }
         break;
       default: printf("\n***Good Bye!***\n");
@@ -53,7 +53,7 @@ int main(void)
 }
 
 //Функция отображения меню
-int menu(void)
+int Menu(void)
 {
   int option;
   printf("\nКакое действие выполняем:\n"
@@ -71,37 +71,37 @@ int menu(void)
 }
 
 //
-void add_phone(phone Book[N], unsigned char Lim)
+void AddPhone(Phone book[N], unsigned char lim)
 {
-  char New_Name[22];
-  long int New_Num;
+  char new_name[22];
+  long int new_num;
 
   printf("Введите имя абонента:\n");
-  scanf("%s",&New_Name);
+  scanf("%s",&new_name);
   printf("Введите телефон(10-зн) абонента:\n");
-  scanf("%ld",&New_Num);
+  scanf("%ld",&new_num);
   printf("==========\n"
   "Абонент добавлен\n");
-  memcpy(Book[Lim].Name, New_Name, 22);
-  Book[Lim].Number = New_Num;
+  memcpy(book[lim].name, new_name, 22);
+  book[lim].number = new_num;
 }
 
 //
-void show(phone Book[N], unsigned char Lim)
+void Show(Phone book[N], unsigned char lim)
 {
   printf("==========\n");
-  if (Lim == 0) {printf("Список абонентов пуст\n");}
+  if (lim == 0) {printf("Список абонентов пуст\n");}
   else {
-    for (unsigned char i = 0; i < Lim; i++)
+    for (unsigned char i = 0; i < lim; i++)
     {
-      printf("%d.) %s - %ld\n", i+1, Book[i].Name, Book[i].Number);
+      printf("%d.) %s - %ld\n", i+1, book[i].name, book[i].number);
     }
   }
   printf("==========\n");
 }
 
 //
-void find_acc(phone Book[N])
+void FindAcc(Phone book[N])
 {
   long int key;
   char flag=0;
@@ -111,30 +111,30 @@ void find_acc(phone Book[N])
 
   for (int i = 0; i < N; i++)
   {
-    if (Book[i].Number == key) { flag = i; break;}
+    if (book[i].number == key) { flag = i; break;}
   }
   (flag == 0) ? printf("Данный абонент не обнаружен!\n") :
-  printf("%s - %ld\n", Book[flag].Name, Book[flag].Number);
+  printf("%s - %ld\n", book[flag].name, book[flag].number);
   printf("==========\n");
 }
 
 //
-char cross_out(phone Book[N], unsigned char Lim)
+char CrossOut(Phone book[N], unsigned char lim)
 {
   int pos;
   printf("==========\n");
   printf("Какого абонента убираем?\n:");
   scanf("%d",&pos);
 
-  if (pos < 1 || pos  > Lim) { return -1;}
+  if (pos < 1 || pos  > lim) { return -1;}
   else {
-    for (int i=pos-1; i<Lim-1;i++)
+    for (int i=pos-1; i<lim-1;i++)
     {
-      memcpy(Book[i].Name, Book[i+1].Name, 22);
-      Book[i].Number = Book[i+1].Number;
+      memcpy(book[i].name, book[i+1].name, 22);
+      book[i].number = book[i+1].number;
     }
-    memcpy(Book[Lim-1].Name, "", 22);
-    Book[Lim-1].Number = 0;
+    memcpy(book[lim-1].name, "", 22);
+    book[lim-1].number = 0;
     return 1;
   }
   printf("\nАбонент удалён\n==========\n");
